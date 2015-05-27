@@ -12,7 +12,7 @@ A typical application which can benefits from technique is videoconferencing wit
 ### Basic setup
 - **Clone directory:**
 
-	\> git clone git clone https://github.com/tyze/scala264 
+	\> git clone git clone  https://github.com/nicotyze/scala264.git 
 
 - **x264:**
 
