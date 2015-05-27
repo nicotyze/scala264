@@ -1,0 +1,20 @@
+diff --git a/encoder/encoder.c b/encoder/encoder.c
+index edc387c..e895069 100644
+--- a/encoder/encoder.c
++++ b/encoder/encoder.c
+@@ -2188,6 +2188,15 @@ static inline void x264_reference_build_list( x264_t *h, int i_poc )
+     {
+         if( h->frames.reference[i]->b_corrupt )
+             continue;
++        if( (i_poc/2)%2==0 && (h->frames.reference[i]->i_poc/2)%2 == 1){//tyze
++            //printf("pdvihvsioh \n");
++            //fflush(stdout);
++            h->frames.reference[i]->b_corrupt=1;
++            continue;
++        }
++        else{
++            h->frames.reference[i]->b_corrupt=0;
++        }
+         if( h->frames.reference[i]->i_poc < i_poc )
+             h->fref[0][h->i_ref[0]++] = h->frames.reference[i];
+         else if( h->frames.reference[i]->i_poc > i_poc )
