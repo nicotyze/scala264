@@ -5,7 +5,7 @@ This project provides a simple and convenient framework to produce H.264/AVC "ps
 ### Principle
 A slightly modified version of x264 is used through the API to encode a raw video stream by repeating twice each input frame. The first time, the frame is encoded at low bitrate. This low quality version of the frame is inserted in the reference frame buffer and can be used at the next iteration to predict the same content at higher quality level.
 
-This approach does not require any additional syntax elements and the stream remains AVC compliant. The only trick to deal with is the duplication of each input frame. By reusing the frame encoded at low bitrate in the prediction loop, the compression efficieny is improved compared to the classical simulcast approach
+This approach does not require any additional syntax elements and the stream remains AVC compliant. The only trick to deal with is the duplication of each input frame. By reusing the frame encoded at low bitrate in the prediction loop, the compression efficieny is improved compared to the classical simulcast approach.
 
 A typical application which can benefits from technique is videoconferencing with more than two simultaneous users. In videoconferencing systems, the MCU (Multipoint Control Unit) forwards a stream coming from one user to the others. With the scalable approach, the users provide their streams with different bitrate, allowing the MCU to adapt the retransmission rates with respect to the different users' bandwidth. 
 
@@ -31,10 +31,11 @@ A typical application which can benefits from technique is videoconferencing wit
 	\> cd ..   
 	\> make
 
-- **Scalable encoding from file:**
+- **Scalable encoding from a file:**
 
 	Generate a scalable stream  (10 seconds) from  YUV raw file (pattern):
 
+	\> tar -zxvf pattern_640x480_15fps.yuv.tar.gz   
 	\> ./H264enc pattern_640x480_15fps.yuv test_scala.264  10
 
 - **Decode the stream:**
@@ -61,7 +62,7 @@ A typical application which can benefits from technique is videoconferencing wit
 	\> mkdir build   
 	\> ./configure --prefix=./build --disable-shared --enable-static --disable-lzma --disable-bzlib --disable-zlib && make && make install
 
-- **Build player**
+- **Build the player**
 
 	\> cd .. && make
 
@@ -71,13 +72,13 @@ A typical application which can benefits from technique is videoconferencing wit
 
 	It is possible to choose the quality level, interactively.
 
-- **Encode from file and decode/play in a loop**
+- **Encode from a file and decode/play in a loop**
 
 	\> ../../H264enc ../../pattern_640x480_15fps.yuv /dev/stdout 0  |  ./Player /dev/stdin
 
 	Wait a few seconds before the decoded video is displayed.
 
-- **Encode from webcam and decode/play in a loop**
+- **Encode from a webcam and decode/play in a loop**
 
 	After installing v4l2 developpment environment (Ubuntu: sudo apt-get install libv4l-dev):
 
